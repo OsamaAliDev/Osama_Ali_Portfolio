@@ -214,6 +214,7 @@
             min-height: 100vh;
             display: flex;
             align-items: center;
+            overflow: hidden;
         }
         .hero::before {
             content: '';
@@ -1192,12 +1193,157 @@
         }
 
         @media (max-width: 576px) {
+            html,
+            body {
+                width: 100%;
+                max-width: 100%;
+                overflow-x: hidden;
+            }
+            .container {
+                width: 100%;
+                max-width: 100%;
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            section {
+                padding: 3rem 0;
+            }
+            .hero {
+                padding-top: 5.5rem;
+            }
             .hero h1 {
                 font-size: 2.1rem;
+                overflow-wrap: anywhere;
+            }
+            .hero .subtitle,
+            .hero .location-tag {
+                font-size: 0.9rem;
+            }
+            .hero .location-tag {
+                align-items: flex-start;
             }
             .btn-hud {
                 padding: 0.6rem 1.5rem;
                 font-size: 0.85rem;
+            }
+            .hero .d-flex.flex-wrap {
+                align-items: stretch !important;
+                flex-direction: column;
+            }
+            .hero .d-flex.flex-wrap .btn-hud {
+                width: 100%;
+                justify-content: center;
+            }
+            .hero-social {
+                margin-top: 1.5rem !important;
+            }
+            .section-title {
+                font-size: 1.45rem;
+            }
+            .project-summary {
+                margin-bottom: 2rem;
+            }
+            .summary-item {
+                min-width: 0;
+                padding: 0.8rem 0.4rem;
+            }
+            .summary-item strong {
+                font-size: 1.15rem;
+            }
+            .summary-item span {
+                font-size: 0.58rem;
+            }
+            .project-zigzag {
+                gap: 1.5rem;
+            }
+            .project-row {
+                border-radius: 14px;
+            }
+            .project-row .project-visual {
+                min-height: 165px;
+                padding: 1rem;
+            }
+            .project-row .project-info {
+                min-width: 0;
+                padding: 1.2rem 1rem 1.4rem;
+            }
+            .project-row .project-info .project-title {
+                font-size: 1.1rem;
+                overflow-wrap: anywhere;
+            }
+            .project-row .project-info .project-desc {
+                font-size: 0.88rem;
+                line-height: 1.6;
+            }
+            .project-row .project-info .tech-tag {
+                padding: 0.2rem 0.65rem;
+                font-size: 0.65rem;
+            }
+            .project-row .project-info .project-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .project-row .project-info .project-actions .btn-sm-hud {
+                width: 100%;
+                justify-content: center;
+                padding: 0.55rem 0.8rem;
+            }
+            .contact-panel,
+            .contact-form-wrap {
+                border-radius: 14px;
+            }
+            .contact-panel .contact-row {
+                align-items: flex-start;
+            }
+            .contact-panel .contact-row .contact-info {
+                min-width: 0;
+            }
+            .contact-panel .contact-row .contact-info a,
+            .contact-panel .contact-row .contact-info span {
+                display: block;
+                overflow-wrap: anywhere;
+                font-size: 0.85rem;
+            }
+            .contact-panel .contact-row .contact-arrow {
+                margin-left: auto;
+                padding-top: 0.4rem;
+            }
+            .contact-form-wrap .form-control {
+                min-height: 46px;
+            }
+            .contact-form-wrap textarea.form-control {
+                min-height: 120px;
+            }
+            .footer {
+                padding-left: 1rem;
+                padding-right: 1rem;
+                font-size: 0.75rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .navbar-custom .navbar-brand {
+                font-size: 0.95rem;
+            }
+            .navbar-custom .container {
+                padding-left: 0.75rem;
+                padding-right: 0.75rem;
+            }
+            .hero h1 {
+                font-size: 1.9rem;
+            }
+            .hero-badge {
+                font-size: 0.62rem;
+                letter-spacing: 0.04em;
+            }
+            .timeline {
+                padding-left: 1.45rem;
+            }
+            .timeline-item .timeline-dot {
+                left: -1.45rem;
+            }
+            .project-row .project-visual {
+                min-height: 145px;
             }
         }
 
