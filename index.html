@@ -661,6 +661,70 @@
             transform: translateY(-4px);
         }
 
+        .project-row.project-featured {
+            border-color: rgba(0, 240, 255, 0.45);
+            box-shadow: 0 0 36px rgba(0, 240, 255, 0.1);
+        }
+        .project-row.project-featured .project-visual {
+            background: linear-gradient(145deg, #071a25 0%, #123448 100%) !important;
+        }
+        .project-level {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            width: fit-content;
+            margin-bottom: 0.7rem;
+            border: 1px solid var(--border-subtle);
+            border-radius: 30px;
+            padding: 0.2rem 0.75rem;
+            color: var(--text-secondary);
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+        .project-level i { color: var(--text-muted); font-size: 0.55rem; }
+        .project-level.advanced {
+            color: var(--accent);
+            border-color: var(--accent-dim);
+            background: rgba(0, 240, 255, 0.09);
+            box-shadow: 0 0 18px rgba(0, 240, 255, 0.08);
+        }
+        .project-level.advanced i { color: var(--accent); }
+        .project-level.intermediate {
+            color: #b5d7ff;
+            border-color: rgba(181, 215, 255, 0.25);
+            background: rgba(181, 215, 255, 0.06);
+        }
+        .project-summary {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            margin: 0 auto 3rem;
+            max-width: 860px;
+            overflow: hidden;
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            background: var(--border-subtle);
+        }
+        .summary-item { padding: 1rem 0.75rem; text-align: center; background: var(--bg-card); }
+        .summary-item strong {
+            display: block;
+            color: var(--accent);
+            font-family: var(--font-display);
+            font-size: 1.45rem;
+            line-height: 1.2;
+        }
+        .summary-item span {
+            display: block;
+            margin-top: 0.25rem;
+            color: var(--text-muted);
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
         .project-row .project-visual {
             flex: 0 0 40%;
             min-height: 220px;
@@ -730,9 +794,20 @@
             opacity: 0.5;
             user-select: none;
             filter: drop-shadow(0 0 40px rgba(0, 240, 255, 0.06));
-            z-index: 1;
+            z-index: 0;
             position: relative;
         }
+        .project-row .project-visual .project-screenshot {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            inset: 0;
+            opacity: 0.72;
+            transition: var(--transition);
+            z-index: 1;
+        }
+        .project-row:hover .project-visual .project-screenshot { opacity: 1; }
 
         .project-row .project-info {
             flex: 1;
@@ -812,6 +887,7 @@
         }
 
         @media (max-width: 768px) {
+            .project-summary { grid-template-columns: repeat(2, 1fr); }
             .project-row .project-visual {
                 flex: 0 0 100%;
                 min-height: 180px;
@@ -1017,6 +1093,15 @@
             width: 100%;
             justify-content: center;
         }
+        .form-status {
+            min-height: 1.5rem;
+            margin-top: 0.9rem;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            text-align: center;
+        }
+        .form-status.success { color: var(--accent); }
+        .form-status.error { color: #ff8f9c; }
 
         @media (max-width: 576px) {
             .contact-panel {
@@ -1238,8 +1323,8 @@ HERO
                     <a href="#projects" class="btn-hud btn-hud-outline">
                         <i class="bi bi-grid-3x3-gap-fill"></i> View work
                     </a>
-                    <a href="cv.pdf" class="btn-hud btn-hud-accent-outline" download>
-                        <i class="bi bi-file-pdf-fill"></i> Download CV
+                    <a href="#contact" class="btn-hud btn-hud-accent-outline">
+                        <i class="bi bi-file-pdf-fill"></i> Request CV
                     </a>
                 </div>
 
@@ -1315,8 +1400,8 @@ EDUCATION — VERTICAL TIMELINE + CERTIFICATES
                         <div class="timeline-content">
                             <span class="timeline-icon"><i class="bi bi-mortarboard-fill"></i></span>
                             <h4>Burj Al‑Arab Technological University</h4>
-                            <div class="timeline-meta">Bachelor's Degree · Alexandria</div>
-                            <div class="timeline-desc">Specialization in Frontend Development · Graduated</div>
+                            <div class="timeline-meta">Bachelor's Degree · Alexandria · 2026</div>
+                            <div class="timeline-desc">Specialization in Frontend Development · Graduated in 2026</div>
                         </div>
                     </div>
 
@@ -1326,7 +1411,7 @@ EDUCATION — VERTICAL TIMELINE + CERTIFICATES
                         <div class="timeline-content">
                             <span class="timeline-icon"><i class="bi bi-laptop"></i></span>
                             <h4>NTI — National Telecommunication Institute</h4>
-                            <div class="timeline-meta">Frontend Development Track</div>
+                            <div class="timeline-meta">Frontend Development Track · 2026</div>
                             <div class="timeline-desc">Comprehensive training in modern frontend technologies &amp; best practices</div>
                         </div>
                     </div>
@@ -1339,14 +1424,14 @@ EDUCATION — VERTICAL TIMELINE + CERTIFICATES
                         <i class="bi bi-award-fill" style="color:var(--accent);"></i> Certificates
                     </h5>
                     <div class="cert-grid justify-content-center">
-                        <a href="#" class="cert-badge" target="_blank" rel="noopener noreferrer">
+                        <span class="cert-badge" style="cursor:default;">
                             <span class="cert-icon"><i class="bi bi-file-earmark-check-fill"></i></span>
-                            NTI Frontend Track · 2024
+                            NTI Frontend Track · 2026
                             <i class="bi bi-box-arrow-up-right" style="font-size:0.6rem; opacity:0.5;"></i>
-                        </a>
+                        </span>
                         <span class="cert-badge" style="cursor:default;">
                             <span class="cert-icon"><i class="bi bi-trophy-fill"></i></span>
-                            BATU Graduation Project · 2024
+                            BATU Graduation Project · 2026
                         </span>
                     </div>
                 </div>
@@ -1411,138 +1496,27 @@ PROJECTS — ALTERNATING ZIG-ZAG LAYOUT
     <div class="container">
         <h2 class="section-title text-center">Featured Projects</h2>
         <p class="text-center text-secondary mb-5" style="color:var(--text-secondary);">
-            Built with vanilla HTML, CSS, Bootstrap &amp; JavaScript
+            Ranked by project scope, technical depth &amp; implementation maturity
         </p>
+
+        <div class="project-summary reveal" aria-label="Project evaluation summary">
+            <div class="summary-item"><strong>1</strong><span>Advanced</span></div>
+            <div class="summary-item"><strong>3</strong><span>Intermediate</span></div>
+            <div class="summary-item"><strong>6</strong><span>Beginner</span></div>
+            <div class="summary-item"><strong>NEXUS</strong><span>Top project</span></div>
+        </div>
 
         <div class="project-zigzag">
 
-            <!-- ===== Project 1: GameReview ===== -->
-            <div class="project-row reveal">
-                <div class="project-visual" style="background: linear-gradient(145deg, #0d1421 0%, #1a2638 100%);">
-                    <img src="https://api.microlink.io/?url=https://osamaalidev.github.io/GameReview/&screenshot=true&embed=screenshot.url" alt="GameReview project screenshot" loading="lazy" onerror="this.style.display='none'" />
-                    <span class="visual-badge"><i class="bi bi-code-slash me-1"></i> API</span>
-                    <span class="visual-fallback-emoji">🎮</span>
-                    <div class="visual-bg-glow"></div>
-                </div>
-                <div class="project-info">
-                    <h5 class="project-title">GameReview</h5>
-                    <p class="project-desc">A game review/browsing web app consuming a third‑party API to display game data with dynamic filtering.</p>
-                    <div class="tech-tags">
-                        <span class="tech-tag">HTML</span>
-                        <span class="tech-tag">CSS</span>
-                        <span class="tech-tag">Bootstrap</span>
-                        <span class="tech-tag">JavaScript</span>
-                        <span class="tech-tag">API</span>
-                    </div>
-                    <div class="project-actions">
-                        <a href="https://osamaalidev.github.io/GameReview/" target="_blank" rel="noopener noreferrer" class="btn-sm-hud accent"><i class="bi bi-box-arrow-up-right"></i> Live Demo</a>
-                        <a href="https://github.com/OsamaAliDev/GameReview" target="_blank" rel="noopener noreferrer" class="btn-sm-hud"><i class="bi bi-github"></i> GitHub</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ===== Project 2: FoodReview ===== -->
-            <div class="project-row row-alt reveal">
-                <div class="project-visual" style="background: linear-gradient(145deg, #0d1421 0%, #1f2a3e 100%);">
-                    <img src="https://api.microlink.io/?url=https://osamaalidev.github.io/FoodReview/&screenshot=true&embed=screenshot.url" alt="FoodReview project screenshot" loading="lazy" onerror="this.style.display='none'" />
-                    <span class="visual-badge"><i class="bi bi-code-slash me-1"></i> CRUD</span>
-                    <span class="visual-fallback-emoji">🍽️</span>
-                    <div class="visual-bg-glow"></div>
-                </div>
-                <div class="project-info">
-                    <h5 class="project-title">FoodReview</h5>
-                    <p class="project-desc">A food/restaurant review web application featuring dynamic content rendering and interactive UI components.</p>
-                    <div class="tech-tags">
-                        <span class="tech-tag">HTML</span>
-                        <span class="tech-tag">CSS</span>
-                        <span class="tech-tag">Bootstrap</span>
-                        <span class="tech-tag">JavaScript</span>
-                    </div>
-                    <div class="project-actions">
-                        <a href="https://osamaalidev.github.io/FoodReview/" target="_blank" rel="noopener noreferrer" class="btn-sm-hud accent"><i class="bi bi-box-arrow-up-right"></i> Live Demo</a>
-                        <a href="https://github.com/OsamaAliDev/FoodReview" target="_blank" rel="noopener noreferrer" class="btn-sm-hud"><i class="bi bi-github"></i> GitHub</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ===== Project 3: SMART_CITY ===== -->
-            <div class="project-row reveal">
-                <div class="project-visual" style="background: linear-gradient(145deg, #080c14 0%, #142033 100%);">
-                    <img src="https://api.microlink.io/?url=https://osamaalidev.github.io/SMART_CITY/&screenshot=true&embed=screenshot.url" alt="SMART_CITY project screenshot" loading="lazy" onerror="this.style.display='none'" />
-                    <span class="visual-badge"><i class="bi bi-code-slash me-1"></i> Dashboard</span>
-                    <span class="recent-badge"><i class="bi bi-arrow-repeat me-1"></i> redeployed</span>
-                    <span class="visual-fallback-emoji">🌐</span>
-                    <div class="visual-bg-glow"></div>
-                </div>
-                <div class="project-info">
-                    <h5 class="project-title">SMART_CITY · NEXUS CITY OS</h5>
-                    <p class="project-desc">Large‑scale smart city dashboard (~9,400 lines of vanilla JS) simulating subsystems: smart home, autonomous vehicles, EV charging, parking, and warehouse management. Built with FastAPI/SQLite backend as part of a 33‑person graduation team.</p>
-                    <div class="tech-tags">
-                        <span class="tech-tag">HTML</span>
-                        <span class="tech-tag">CSS</span>
-                        <span class="tech-tag">JavaScript</span>
-                        <span class="tech-tag">FastAPI</span>
-                        <span class="tech-tag">Dashboard</span>
-                        <span class="tech-tag">HUD</span>
-                    </div>
-                    <div class="project-actions">
-                        <a href="https://osamaalidev.github.io/SMART_CITY/" target="_blank" rel="noopener noreferrer" class="btn-sm-hud accent"><i class="bi bi-box-arrow-up-right"></i> Live Demo</a>
-                        <a href="https://github.com/OsamaAliDev/SMART_CITY" target="_blank" rel="noopener noreferrer" class="btn-sm-hud"><i class="bi bi-github"></i> GitHub</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ===== Project 4: Weather ===== -->
-            <div class="project-row row-alt reveal">
-                <div class="project-visual" style="background: linear-gradient(145deg, #0a1628 0%, #1a2a44 100%);">
-                    <img src="https://api.microlink.io/?url=https://osamaalidev.github.io/Weather/&screenshot=true&embed=screenshot.url" alt="Weather project screenshot" loading="lazy" onerror="this.style.display='none'" />
-                    <span class="visual-badge"><i class="bi bi-code-slash me-1"></i> API</span>
-                    <span class="visual-fallback-emoji">🌤️</span>
-                    <div class="visual-bg-glow"></div>
-                </div>
-                <div class="project-info">
-                    <h5 class="project-title">Weather</h5>
-                    <p class="project-desc">A weather forecast web app that displays current conditions and a 5‑day forecast for any city. Built with vanilla JavaScript, it fetches real‑time weather data and features a clean, responsive UI.</p>
-                    <div class="tech-tags">
-                        <span class="tech-tag">HTML</span>
-                        <span class="tech-tag">CSS</span>
-                        <span class="tech-tag">JavaScript</span>
-                        <span class="tech-tag">API</span>
-                        <span class="tech-tag">Responsive</span>
-                    </div>
-                    <div class="project-actions">
-                        <a href="https://osamaalidev.github.io/Weather/" target="_blank" rel="noopener noreferrer" class="btn-sm-hud accent"><i class="bi bi-box-arrow-up-right"></i> Live Demo</a>
-                        <a href="https://github.com/OsamaAliDev/Weather" target="_blank" rel="noopener noreferrer" class="btn-sm-hud"><i class="bi bi-github"></i> GitHub</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ===== Project 5: Graduation Project (Free-To-Play Games + RapidAPI) ===== -->
-            <div class="project-row reveal">
-                <div class="project-visual" style="background: linear-gradient(145deg, #0a0f1e 0%, #1a2a3a 100%);">
-                    <img src="https://api.microlink.io/?url=https://osamaalidev.github.io/Free-To-Play-Games/&screenshot=true&embed=screenshot.url" alt="Free-To-Play Games project screenshot" loading="lazy" onerror="this.style.display='none'" />
-                    <span class="visual-badge"><i class="bi bi-star-fill me-1"></i> Grad Project</span>
-                    <span class="recent-badge"><i class="bi bi-code-slash me-1"></i> self‑written</span>
-                    <span class="visual-fallback-emoji">⚔️</span>
-                    <div class="visual-bg-glow"></div>
-                </div>
-                <div class="project-info">
-                    <h5 class="project-title">Free‑To‑Play Games <span style="font-size:0.7rem; color:var(--accent-dim); font-weight:400;">(RapidAPI)</span></h5>
-                    <p class="project-desc">A fully hand‑written vanilla JS application consuming the Free‑To‑Play Games API via RapidAPI. Features dynamic filtering, game details modal, and a responsive grid — every line of code is self‑authored and interview‑defensible.</p>
-                    <div class="tech-tags">
-                        <span class="tech-tag">HTML</span>
-                        <span class="tech-tag">CSS</span>
-                        <span class="tech-tag">Bootstrap</span>
-                        <span class="tech-tag">JavaScript</span>
-                        <span class="tech-tag">RapidAPI</span>
-                        <span class="tech-tag">Modal</span>
-                    </div>
-                    <div class="project-actions">
-                        <a href="https://osamaalidev.github.io/Free-To-Play-Games/" target="_blank" rel="noopener noreferrer" class="btn-sm-hud accent"><i class="bi bi-box-arrow-up-right"></i> Live Demo</a>
-                        <a href="https://github.com/OsamaAliDev/Free-To-Play-Games" target="_blank" rel="noopener noreferrer" class="btn-sm-hud"><i class="bi bi-github"></i> GitHub</a>
-                    </div>
-                </div>
-            </div>
+            <div class="project-row project-featured reveal"><div class="project-visual"><span class="visual-badge"><i class="bi bi-stars me-1"></i> Flagship dashboard</span><span class="recent-badge"><i class="bi bi-award-fill me-1"></i> Advanced</span><span class="visual-fallback-emoji">N</span><div class="visual-bg-glow"></div></div><div class="project-info"><span class="project-level advanced"><i class="bi bi-circle-fill"></i> Advanced · #1</span><h5 class="project-title">NEXUS_CITY</h5><p class="project-desc">A large-scale smart-city operating system and dashboard combining multiple simulated subsystems, rich interfaces, and a full-stack graduation-project scope.</p><div class="tech-tags"><span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">JavaScript</span><span class="tech-tag">FastAPI</span><span class="tech-tag">SQLite</span><span class="tech-tag">Dashboard</span></div><div class="project-actions"><a href="https://github.com/OsamaAliDev/NEXUS_CITY" target="_blank" rel="noopener noreferrer" class="btn-sm-hud accent"><i class="bi bi-github"></i> View GitHub</a></div></div></div>
+            <div class="project-row row-alt reveal"><div class="project-visual"><span class="visual-badge"><i class="bi bi-database me-1"></i> CRUD</span><span class="visual-fallback-emoji">▦</span><div class="visual-bg-glow"></div></div><div class="project-info"><span class="project-level intermediate"><i class="bi bi-circle-fill"></i> Intermediate · #2</span><h5 class="project-title">CRUD System</h5><p class="project-desc">A practical management interface focused on creating, reading, updating, and deleting records with clear forms, validation, and responsive interaction.</p><div class="tech-tags"><span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">Bootstrap</span><span class="tech-tag">JavaScript</span><span class="tech-tag">CRUD</span><span class="tech-tag">localStorage</span></div><div class="project-actions"><a href="https://github.com/OsamaAliDev/crud-system" target="_blank" rel="noopener noreferrer" class="btn-sm-hud accent"><i class="bi bi-github"></i> View GitHub</a></div></div></div>
+            <div class="project-row reveal"><div class="project-visual"><span class="visual-badge"><i class="bi bi-cloud-sun me-1"></i> API application</span><span class="visual-fallback-emoji">W</span><div class="visual-bg-glow"></div></div><div class="project-info"><span class="project-level intermediate"><i class="bi bi-circle-fill"></i> Intermediate · #3</span><h5 class="project-title">Weather</h5><p class="project-desc">A responsive weather application that turns remote API data into a clear city forecast experience with asynchronous JavaScript and dynamic rendering.</p><div class="tech-tags"><span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">JavaScript</span><span class="tech-tag">REST API</span><span class="tech-tag">Responsive</span></div><div class="project-actions"><a href="https://github.com/OsamaAliDev/Weather" target="_blank" rel="noopener noreferrer" class="btn-sm-hud accent"><i class="bi bi-github"></i> View GitHub</a></div></div></div>
+            <div class="project-row row-alt reveal"><div class="project-visual"><span class="visual-badge"><i class="bi bi-shop me-1"></i> Business UI</span><span class="visual-fallback-emoji">B</span><div class="visual-bg-glow"></div></div><div class="project-info"><span class="project-level intermediate"><i class="bi bi-circle-fill"></i> Intermediate · #4</span><h5 class="project-title">Bakery</h5><p class="project-desc">A polished bakery website presenting products and brand content through a structured, responsive layout with a strong focus on visual hierarchy.</p><div class="tech-tags"><span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">Bootstrap</span><span class="tech-tag">Responsive UI</span></div><div class="project-actions"><a href="https://github.com/OsamaAliDev/Bakery" target="_blank" rel="noopener noreferrer" class="btn-sm-hud accent"><i class="bi bi-github"></i> View GitHub</a></div></div></div>
+            <div class="project-row reveal"><div class="project-visual"><span class="visual-badge"><i class="bi bi-controller me-1"></i> API interface</span><span class="visual-fallback-emoji">G</span><div class="visual-bg-glow"></div></div><div class="project-info"><span class="project-level beginner"><i class="bi bi-circle-fill"></i> Beginner · #5</span><h5 class="project-title">GameReview2</h5><p class="project-desc">A game browsing and review interface that demonstrates API consumption, dynamic content, and interactive filtering in a focused frontend project.</p><div class="tech-tags"><span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">Bootstrap</span><span class="tech-tag">JavaScript</span><span class="tech-tag">API</span></div><div class="project-actions"><a href="https://github.com/OsamaAliDev/GameReview2" target="_blank" rel="noopener noreferrer" class="btn-sm-hud accent"><i class="bi bi-github"></i> View GitHub</a></div></div></div>
+            <div class="project-row row-alt reveal"><div class="project-visual"><span class="visual-badge"><i class="bi bi-person-badge me-1"></i> Profile UI</span><span class="visual-fallback-emoji">F</span><div class="visual-bg-glow"></div></div><div class="project-info"><span class="project-level beginner"><i class="bi bi-circle-fill"></i> Beginner · #6</span><h5 class="project-title">Fokir</h5><p class="project-desc">A personal-profile landing page built around responsive sections, typography, navigation, and a clean presentation of services and identity.</p><div class="tech-tags"><span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">Responsive</span><span class="tech-tag">Landing page</span></div><div class="project-actions"><a href="https://github.com/OsamaAliDev/Fokir" target="_blank" rel="noopener noreferrer" class="btn-sm-hud accent"><i class="bi bi-github"></i> View GitHub</a></div></div></div>
+            <div class="project-row reveal"><div class="project-visual"><span class="visual-badge"><i class="bi bi-egg-fried me-1"></i> Review UI</span><span class="visual-fallback-emoji">F</span><div class="visual-bg-glow"></div></div><div class="project-info"><span class="project-level beginner"><i class="bi bi-circle-fill"></i> Beginner · #7</span><h5 class="project-title">FoodReview</h5><p class="project-desc">A food and restaurant review interface with dynamic content presentation and interactive frontend components.</p><div class="tech-tags"><span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">Bootstrap</span><span class="tech-tag">JavaScript</span></div><div class="project-actions"><a href="https://github.com/OsamaAliDev/FoodReview" target="_blank" rel="noopener noreferrer" class="btn-sm-hud accent"><i class="bi bi-github"></i> View GitHub</a></div></div></div>
+            <div class="project-row row-alt reveal"><div class="project-visual"><span class="visual-badge"><i class="bi bi-building me-1"></i> Agency UI</span><span class="visual-fallback-emoji">C</span><div class="visual-bg-glow"></div></div><div class="project-info"><span class="project-level beginner"><i class="bi bi-circle-fill"></i> Beginner · #8</span><h5 class="project-title">Creative Agency</h5><p class="project-desc">A creative-agency style website focused on layout composition, service sections, portfolio presentation, and responsive visual polish.</p><div class="tech-tags"><span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">Bootstrap</span><span class="tech-tag">Responsive UI</span></div><div class="project-actions"><a href="https://github.com/OsamaAliDev/Creative-Agency" target="_blank" rel="noopener noreferrer" class="btn-sm-hud accent"><i class="bi bi-github"></i> View GitHub</a></div></div></div>
+            <div class="project-row reveal"><div class="project-visual"><span class="visual-badge"><i class="bi bi-window me-1"></i> Portfolio</span><span class="visual-fallback-emoji">O</span><div class="visual-bg-glow"></div></div><div class="project-info"><span class="project-level beginner"><i class="bi bi-circle-fill"></i> Beginner · #9</span><h5 class="project-title">Osama_Ali_Portfolio</h5><p class="project-desc">This portfolio itself: a responsive personal site that brings together project presentation, career focus, contact actions, and a consistent HUD-inspired visual language.</p><div class="tech-tags"><span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">Bootstrap</span><span class="tech-tag">JavaScript</span></div><div class="project-actions"><a href="https://github.com/OsamaAliDev/Osama_Ali_Portfolio" target="_blank" rel="noopener noreferrer" class="btn-sm-hud accent"><i class="bi bi-github"></i> View GitHub</a></div></div></div>
 
         </div><!-- /project-zigzag -->
     </div>
@@ -1640,12 +1614,16 @@ CONTACT — UNIFIED SINGLE PANEL + FORM
 
                 </div>
 
-                <!-- ===== Contact Form (Formspree) ===== -->
+                <!-- ===== Contact Form (FormSubmit) ===== -->
                 <div class="contact-form-wrap reveal">
                     <h5 style="font-family:var(--font-display); font-weight:600; color:var(--text-primary); margin-bottom:1.2rem;">
                         <i class="bi bi-chat-dots-fill" style="color:var(--accent);"></i> Send a message
                     </h5>
-                    <form action="https://formspree.io/f/xpznkjke" method="POST">
+                    <form id="contactForm" action="https://formsubmit.co/osamaali.dev1@gmail.com" method="POST" target="_blank">
+                        <input type="hidden" name="_subject" value="New portfolio message from Osama Ali" />
+                        <input type="hidden" name="_template" value="table" />
+                        <input type="hidden" name="_captcha" value="true" />
+                        <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none" />
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <label for="formName" class="form-label">Name</label>
@@ -1895,17 +1873,94 @@ VANILLA JAVASCRIPT
         console.log('%cBuilt with vanilla HTML, CSS, Bootstrap 5 & JavaScript', 'font-size:12px; color:#5a7298;');
         console.log('%c🔍 Ready to defend every line of code.', 'font-size:13px; color:#00f0ff;');
 
+        const liveProjectUrls = {
+            'NEXUS_CITY': 'https://osamaalidev.github.io/NEXUS_CITY/',
+            'crud-system': 'https://osamaalidev.github.io/crud-system/',
+            'Weather': 'https://osamaalidev.github.io/Weather/',
+            'Bakery': 'https://osamaalidev.github.io/bakery/',
+            'GameReview2': 'https://osamaalidev.github.io/GameReview2/',
+            'GameReview': 'https://osamaalidev.github.io/GameReview/',
+            'Fokir': 'https://osamaalidev.github.io/Fokir/',
+            'FoodReview': 'https://osamaalidev.github.io/FoodReview/',
+            'Creative-Agency': 'https://osamaalidev.github.io/creative-agency/',
+            'Osama_Ali_Portfolio': 'https://osamaalidev.github.io/Osama_Ali_Portfolio/'
+        };
+
+        const projectScreenshotUrls = {
+            'NEXUS_CITY': 'https://osamaalidev.github.io/NEXUS_CITY/',
+            'CRUD System': 'https://osamaalidev.github.io/crud-system/',
+            'Weather': 'https://osamaalidev.github.io/Weather/',
+            'Bakery': 'https://osamaalidev.github.io/bakery/',
+            'GameReview2': 'https://osamaalidev.github.io/GameReview2/',
+            'Fokir': 'https://osamaalidev.github.io/Fokir/',
+            'FoodReview': 'https://osamaalidev.github.io/FoodReview/',
+            'Creative Agency': 'https://osamaalidev.github.io/creative-agency/',
+            'Osama_Ali_Portfolio': 'https://osamaalidev.github.io/Osama_Ali_Portfolio/'
+        };
+
+        document.querySelectorAll('.project-row').forEach(projectRow => {
+            const title = projectRow.querySelector('.project-title');
+            const visual = projectRow.querySelector('.project-visual');
+            if (!title || !visual || !projectScreenshotUrls[title.textContent.trim()]) return;
+
+            const screenshot = document.createElement('img');
+            screenshot.className = 'project-screenshot';
+            screenshot.src = 'https://api.microlink.io/?url=' + encodeURIComponent(projectScreenshotUrls[title.textContent.trim()]) + '&screenshot=true&embed=screenshot.url';
+            screenshot.alt = title.textContent.trim() + ' project screenshot';
+            screenshot.loading = 'lazy';
+            screenshot.onerror = () => { screenshot.style.display = 'none'; };
+            visual.insertBefore(screenshot, visual.firstChild);
+        });
+
+        const gameReviewCard = document.createElement('div');
+        gameReviewCard.className = 'project-row row-alt reveal visible';
+        gameReviewCard.innerHTML = '<div class="project-visual"><span class="visual-badge"><i class="bi bi-controller me-1"></i> Free-to-play API</span><span class="visual-fallback-emoji">G</span><div class="visual-bg-glow"></div></div><div class="project-info"><span class="project-level beginner"><i class="bi bi-circle-fill"></i> Beginner · #6</span><h5 class="project-title">GameReview</h5><p class="project-desc">A free-to-play games browser that consumes game data through an API and presents searchable, dynamic game cards with details and launch links.</p><div class="tech-tags"><span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">Bootstrap</span><span class="tech-tag">JavaScript</span><span class="tech-tag">API</span></div><div class="project-actions"><a href="https://osamaalidev.github.io/GameReview/" target="_blank" rel="noopener noreferrer" class="btn-sm-hud accent"><i class="bi bi-box-arrow-up-right"></i> Live Demo</a><a href="https://github.com/OsamaAliDev/GameReview" target="_blank" rel="noopener noreferrer" class="btn-sm-hud"><i class="bi bi-github"></i> View GitHub</a></div></div>';
+        const fokirCard = Array.from(document.querySelectorAll('.project-row')).find(row => row.querySelector('.project-title')?.textContent.trim() === 'Fokir');
+        if (fokirCard) fokirCard.parentElement.insertBefore(gameReviewCard, fokirCard);
+
+        const gameReviewScreenshot = document.createElement('img');
+        gameReviewScreenshot.className = 'project-screenshot';
+        gameReviewScreenshot.src = 'https://api.microlink.io/?url=' + encodeURIComponent('https://osamaalidev.github.io/GameReview/') + '&screenshot=true&embed=screenshot.url';
+        gameReviewScreenshot.alt = 'GameReview project screenshot';
+        gameReviewScreenshot.loading = 'lazy';
+        gameReviewScreenshot.onerror = () => { gameReviewScreenshot.style.display = 'none'; };
+        gameReviewCard.querySelector('.project-visual').insertBefore(gameReviewScreenshot, gameReviewCard.querySelector('.project-visual').firstChild);
+
+        document.querySelectorAll('.project-level').forEach((level, index) => {
+            level.innerHTML = level.innerHTML.replace(/#\d+/, '#' + (index + 1));
+        });
+
+        document.querySelectorAll('.project-actions a[href*="github.com"]').forEach(githubLink => {
+            const repositoryName = githubLink.href.split('/').filter(Boolean).pop();
+            const liveUrl = liveProjectUrls[repositoryName];
+            if (!liveUrl || githubLink.parentElement.querySelector('a[href*="github.io/"]')) return;
+
+            const liveLink = document.createElement('a');
+            liveLink.href = liveUrl;
+            liveLink.target = '_blank';
+            liveLink.rel = 'noopener noreferrer';
+            liveLink.className = 'btn-sm-hud accent';
+            liveLink.innerHTML = '<i class="bi bi-box-arrow-up-right"></i> Live Demo';
+            githubLink.classList.remove('accent');
+            githubLink.parentElement.insertBefore(liveLink, githubLink);
+        });
+
         /**
          * ============================================================
          *  8.  VERIFY PROJECT LINKS (log only — no 404 check possible client‑side)
          * ============================================================
          */
         const projectUrls = [
-            'https://osamaalidev.github.io/GameReview/',
-            'https://osamaalidev.github.io/FoodReview/',
-            'https://osamaalidev.github.io/SMART_CITY/',
-            'https://osamaalidev.github.io/Weather/',
-            'https://osamaalidev.github.io/Free-To-Play-Games/'
+            'https://github.com/OsamaAliDev/NEXUS_CITY',
+            'https://github.com/OsamaAliDev/crud-system',
+            'https://github.com/OsamaAliDev/Weather',
+            'https://github.com/OsamaAliDev/Bakery',
+            'https://github.com/OsamaAliDev/GameReview2',
+            'https://github.com/OsamaAliDev/GameReview',
+            'https://github.com/OsamaAliDev/Fokir',
+            'https://github.com/OsamaAliDev/FoodReview',
+            'https://github.com/OsamaAliDev/Creative-Agency',
+            'https://github.com/OsamaAliDev/Osama_Ali_Portfolio'
         ];
         console.log('%c📦 Project URLs (verify manually):', 'font-weight:600; color:#8da4c9;');
         projectUrls.forEach(url => console.log('  ' + url));
